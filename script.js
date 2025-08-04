@@ -65,5 +65,40 @@ function Cell() {
 
 }
 
+
+function GameController(
+    playerOneName = "Player One",
+    playerTwoName = "Player Two"
+    ) {
+
+    const players = [{ name: playerOneName, token: 1}, { name: playerTwoName, token: 2}];
+
+    let activePlayer = players[0];
+
+    const switchPlayerTurn = () => {
+        if (activePlayer === players[0]) {
+        activePlayer = players[1];
+        } else {
+        activePlayer = players[0];
+        }
+    };
+
+    const getActivePlayer = () => activePlayer
+
+    const printNewRound = () => {
+        board.printBoard();
+        console.log(`It's ${getActivePlayer().name}'s turn.`)
+    }
+
+    return {
+        switchPlayerTurn,
+        getActivePlayer,
+        printNewRound,
+    }
+}
+
+
 const board = GameBoard()
-board.printBoard()
+board.printBoard();
+const game = GameController();
+game.printNewRound()
