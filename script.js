@@ -68,6 +68,7 @@ function GameBoard() {
         printBoard,
         dropToken,
         checkAvailability,
+        resetBoard,
     };
 }
 
@@ -219,7 +220,9 @@ function GameController(
         const gameOver = checkWinner();
         if (gameOver === true) {
             console.log(`This is the end of the game. Do you want to play a new game?`)
-
+            board.resetBoard()
+            switchPlayerTurn();
+            printNewRound();
             return true
         }
 
