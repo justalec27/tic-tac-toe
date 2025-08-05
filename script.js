@@ -9,6 +9,10 @@ Psuedo code:
     - If not available, ask user to choose a new cell
     - after placing token, switch to other player
 4. Player that has 3 tokens in a row will wine
+    - create a function to decide on the winner
+    - winner wins if 3 tokens in a row horizontally vertically or diagonal
+    - the game is a break if the grid is full and no 3 token in a row
+    - play new game when grid is full
 
 Update 4 aug; 
 Loop door de formules en creer functie voor het plaatsen van een token, wss door regel en kolom.
@@ -34,6 +38,7 @@ function GameBoard() {
         board[row][column].addToken(player);
     }
 
+    // Check if the cell is available for token
     const checkAvailability = (row ,column) => {
        if (board[row][column].getValue() != 0) {
             console.log(`This cell is not available. Choose again.`);  
@@ -47,6 +52,16 @@ function GameBoard() {
         const boardWithCellValues = board.map((row) => row.map((cell) => cell.getValue()))
         console.log(boardWithCellValues);
     };
+
+
+    const resetBoard = () => {
+        for (let i = 0 ; i < rows ; i++) {
+            for (let j = 0; j < columns; j++){
+                board[i][j].addToken(0);
+            }
+        }
+    };
+
 
     return {
         getBoard,
@@ -107,6 +122,90 @@ function GameController(
         board.printBoard();
         console.log(`It's ${getActivePlayer().name}'s turn.`)
     }
+
+    const checkWinner = () => {
+        
+        const currentBoard = board.getBoard()
+        // Check all rows
+
+        for (let i = 0; i < 3; i++){
+            if (currentBoard[i][0].getValue() === 1  && 
+                currentBoard[i][1].getValue() === 1  && 
+                currentBoard[i][2].getValue() === 1  
+        ){
+            console.log(`The winner is ${playerOneName}`)
+            return true;
+        } else if (
+                currentBoard[i][0].getValue() === 2  && 
+                currentBoard[i][1].getValue() === 2  && 
+                currentBoard[i][2].getValue() === 2  
+        ) {
+            console.log(`The winner is ${playerTwoName}`)
+            return true;
+        }
+        // Check all columns
+
+       for (let j = 0; j < 3; j++){
+            if (currentBoard[0][j].getValue() === 1  && 
+                currentBoard[1][j].getValue() === 1  && 
+                currentBoard[2][j].getValue() === 1  
+        ){
+            console.log(`The winner is ${playerOneName}`)
+            return true;
+        } else if (
+                currentBoard[0][j].getValue() === 2  && 
+                currentBoard[1][j].getValue() === 2  && 
+                currentBoard[2][j].getValue() === 2  
+        ) {
+            console.log(`The winner is ${playerTwoName}`)
+            return true;
+        }}
+        }
+
+        // Check all diagonals
+        if (    currentBoard[0][0].getValue() === 1  && 
+                currentBoard[1][1].getValue() === 1  && 
+                currentBoard[2][2].getValue() === 1  
+        ){
+             console.log(`The winner is ${playerOneName}`)
+             return true;
+        } else if ( 
+                currentBoard[2][0].getValue() === 1  && 
+                currentBoard[1][1].getValue() === 1  && 
+                currentBoard[0][2].getValue() === 1  
+        ) {
+            console.log(`The winner is ${playerOneName}`)
+            return true;
+        } else if (    
+                currentBoard[0][0].getValue() === 2  && 
+                currentBoard[1][1].getValue() === 2  && 
+                currentBoard[2][2].getValue() === 2  
+        ){
+             console.log(`The winner is ${playerTwoName}`)
+             return true;
+        } else if ( 
+                currentBoard[2][0].getValue() === 2  && 
+                currentBoard[1][1].getValue() === 2  && 
+                currentBoard[0][2].getValue() === 2  
+        ) {
+            console.log(`The winner is ${playerTwoName}`)
+            return true;
+        } else 
+
+        // Check for a tie
+        for (let i = 0; i < 3; i++){
+            for (let j = 0; j < 3; j++){
+                if (currentBoard[i][j].getValue() === 0){
+                    //when empty cell found
+                    return false;
+                }
+            }
+        }
+        console.log(`It's a tie.`)
+        return true
+    }
+
+
     const playRound = (row, column) => {
     //Drop a token for the current player
         
@@ -116,9 +215,14 @@ function GameController(
         board.dropToken(row, column, getActivePlayer().token);
         console.log(`Dropping ${getActivePlayer().name}'s token into row ${row}, column ${column}.`);
 
-            /*  This is where we would check for a winner and handle that logic,
-            such as a win message. */
-        
+        // Decide on winner 
+        const gameOver = checkWinner();
+        if (gameOver === true) {
+            console.log(`This is the end of the game. Do you want to play a new game?`)
+
+            return true
+        }
+
         // Switch player turn
         switchPlayerTurn();
         printNewRound();
