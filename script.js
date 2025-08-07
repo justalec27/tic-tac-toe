@@ -6,6 +6,17 @@ fix renderDisplay function()
 
 
 */
+const square1= document.querySelector(".square1");
+const square2= document.querySelector(".square2");
+const square3 = document.querySelector(".square3 ");
+const square4 = document.querySelector(".square4");
+const square5 = document.querySelector(".square5");
+const square6 = document.querySelector(".square6");
+const square7 = document.querySelector(".square7");
+const square8 = document.querySelector(".square8");
+const square9 = document.querySelector(".square9");
+
+
 
 function GameBoard() {
     //Create the board for the game, 3x3 grid
@@ -50,6 +61,19 @@ function GameBoard() {
         }
     };
 
+    const resetScreen = () => {
+        square1.textContent = currentBoard[0][0].getValue() 
+        square2.textContent = currentBoard[0][1].getValue()
+        square3.textContent = currentBoard[0][2].getValue()
+        square4.textContent = currentBoard[1][0].getValue()
+        square5.textContent = currentBoard[1][1].getValue()
+        square6.textContent = currentBoard[1][2].getValue()
+        square7.textContent = currentBoard[2][0].getValue()
+        square8.textContent = currentBoard[2][1].getValue()
+        square9.textContent = currentBoard[2][2].getValue()
+
+    }
+
 
     return {
         getBoard,
@@ -57,6 +81,7 @@ function GameBoard() {
         dropToken,
         checkAvailability,
         resetBoard,
+        resetScreen,
     };
 }
 
@@ -210,7 +235,8 @@ function GameController(
         const gameOver = checkWinner();
         if (gameOver === true) {
             console.log(`This is the end of the game. Do you want to play a new game?`)
-            board.resetBoard()
+            board.resetBoard();
+            board.resetScreen();
             activePlayer = players[0];
             printNewRound();
             return true
@@ -256,7 +282,6 @@ function renderContent() {
         }
 
     })
-    const square2 = document.querySelector(".square2")
     square2.textContent = currentBoard[0][1].getValue();
     square2.addEventListener("click", () => {
         if (square2.textContent === "0") {
@@ -267,7 +292,7 @@ function renderContent() {
          alert("This cell is not available. Choose again.")
         }
     })
-    const square3 = document.querySelector(".square3 ")
+
     square3.textContent = currentBoard[0][2].getValue();
     square3.addEventListener("click", () => {
         if (square3.textContent === "0") {
@@ -278,7 +303,6 @@ function renderContent() {
          alert("This cell is not available. Choose again.")
         }
     })
-    const square4 = document.querySelector(".square4")
     square4.textContent = currentBoard[1][0].getValue();
     square4.addEventListener("click", () => {
         if (square4.textContent === "0") {
@@ -288,7 +312,6 @@ function renderContent() {
          alert("This cell is not available. Choose again.")
         }
     })
-    const square5 = document.querySelector(".square5")
     square5.textContent = currentBoard[1][1].getValue();
     square5.addEventListener("click", () => {
         if (square5.textContent === "0") {
@@ -299,7 +322,6 @@ function renderContent() {
          alert("This cell is not available. Choose again.")
         }
     })
-    const square6 = document.querySelector(".square6")
     square6.textContent = currentBoard[1][2].getValue();
     square6.addEventListener("click", () => {
         if (square6.textContent === "0") {
@@ -310,66 +332,34 @@ function renderContent() {
          alert("This cell is not available. Choose again.")
         }
     })
-    const square7 = document.querySelector(".square7")
     square7.textContent = currentBoard[2][0].getValue();
     square7.addEventListener("click", () => {
         if (square7.textContent === "0") {
         square7.textContent = game.getActivePlayer().token;
-        game.playRound(1,2)
+        game.playRound(2,0)
         
         } else {
          alert("This cell is not available. Choose again.")
         }
     })
-    const square8 = document.querySelector(".square8")
     square8.textContent = currentBoard[2][1].getValue();
     square8.addEventListener("click", () => {
         if (square8.textContent === "0") {
         square8.textContent = game.getActivePlayer().token;
-        currentBoard[2][1].addToken(game.getActivePlayer().token)
-        
-        console.log(gameOver)
-                // Decide on winner 
-        if (gameOver === true) {
-            alert(`This is the end of the game. Do you want to play a new game?`)
-            board.resetBoard()
-            activePlayer = players[0];
-            printNewRound();
-            return true
-        }
-        game.switchPlayerTurn();
-        game.printNewRound();
-        return true
+        game.playRound(2,1)
         } else {
          alert("This cell is not available. Choose again.")
         }
     })
-    const square9 = document.querySelector(".square9")
     square9.textContent = currentBoard[2][2].getValue();
     square9.addEventListener("click", () => {
         if (square9.textContent === "0") {
         square9.textContent = game.getActivePlayer().token;
-        currentBoard[2][2].addToken(game.getActivePlayer().token)
-        console.log(gameOver)
-                // Decide on winner 
-        if (gameOver === true) {
-            alert(`This is the end of the game. Do you want to play a new game?`)
-            board.resetBoard()
-            activePlayer = players[0];
-            printNewRound();
-            return true
-        }
-        game.switchPlayerTurn();
-        game.printNewRound();
-        return true
+        game.playRound(2,2)
         } else {
          alert("This cell is not available. Choose again.")
         }
-    
    
-    return {
-        renderDisplay,
-    }
 })
 }
 
