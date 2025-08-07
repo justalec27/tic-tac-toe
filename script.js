@@ -1,21 +1,9 @@
 /*
-Psuedo code:
-1. Create a gameboard; which has 3 rows and 3 columns
-2. create players, 1 or 2 players
-3. Players can put a token in turns, with X or O
-    - User select row and column to place cell
-    -check if cell is available (i.d. equal to 0)
-    - If cell is available, place token
-    - If not available, ask user to choose a new cell
-    - after placing token, switch to other player
-4. Player that has 3 tokens in a row will wine
-    - create a function to decide on the winner
-    - winner wins if 3 tokens in a row horizontally vertically or diagonal
-    - the game is a break if the grid is full and no 3 token in a row
-    - play new game when grid is full
+Update 5 aug: 
 
-Update 4 aug; 
-Loop door de formules en creer functie voor het plaatsen van een token, wss door regel en kolom.
+The game is working in developer. Now I need to display everything in the browser.
+fix renderDisplay function()
+
 
 */
 
@@ -103,7 +91,7 @@ function GameController(
     playerTwoName = "Player Two"
     ) {
     
-    const board = GameBoard()
+    const board = GameBoard();
 
     const players = [{ name: playerOneName, token: 1}, { name: playerTwoName, token: 2}];
 
@@ -127,9 +115,11 @@ function GameController(
     const checkWinner = () => {
         
         const currentBoard = board.getBoard()
+        const rows = currentBoard.length;
+        const columns = currentBoard[0].length
         // Check all rows
 
-        for (let i = 0; i < 3; i++){
+        for (let i = 0; i < rows ; i++){
             if (currentBoard[i][0].getValue() === 1  && 
                 currentBoard[i][1].getValue() === 1  && 
                 currentBoard[i][2].getValue() === 1  
@@ -146,7 +136,7 @@ function GameController(
         }
         // Check all columns
 
-       for (let j = 0; j < 3; j++){
+       for (let j = 0; j < columns; j++){
             if (currentBoard[0][j].getValue() === 1  && 
                 currentBoard[1][j].getValue() === 1  && 
                 currentBoard[2][j].getValue() === 1  
@@ -221,7 +211,7 @@ function GameController(
         if (gameOver === true) {
             console.log(`This is the end of the game. Do you want to play a new game?`)
             board.resetBoard()
-            switchPlayerTurn();
+            activePlayer = players[0];
             printNewRound();
             return true
         }
@@ -237,9 +227,236 @@ function GameController(
 
 
     return {
+        switchPlayerTurn,
         getActivePlayer,
         playRound,
+        printNewRound,
+        getBoard: board.getBoard,
+        printBoard: board.printBoard,
+        checkWinner,
     }
 }
 
 const game = GameController();
+
+function renderContent() {
+
+    const renderDisplay = () => {
+     
+    const currentBoard = game.getBoard();
+    const gameOver = game.checkWinner();
+
+    const square1= document.querySelector(".square1");
+    square1.textContent = currentBoard[0][0].getValue();
+    square1.addEventListener("click", () => {
+        if (square1.textContent === "0") {
+        square1.textContent = game.getActivePlayer().token;
+        currentBoard[0][0].addToken(game.getActivePlayer().token)
+
+         // Decide on winner 
+        if (gameOver === true) {
+            alert(`This is the end of the game. Do you want to play a new game?`)
+            board.resetBoard()
+            activePlayer = players[0];
+            printNewRound();
+            return true
+        }
+
+        game.switchPlayerTurn();
+        game.printNewRound();
+        return true
+        } else {
+         alert("This cell is not available. Choose again.")
+        }
+
+    })
+    const square2 = document.querySelector(".square2")
+    square2.textContent = currentBoard[0][1].getValue();
+    square2.addEventListener("click", () => {
+        if (square2.textContent === "0") {
+        square2.textContent = game.getActivePlayer().token;
+        currentBoard[0][1].addToken(game.getActivePlayer().token)
+
+            // Decide on winner 
+            if (gameOver === true) {
+                alert(`This is the end of the game. Do you want to play a new game?`)
+                board.resetBoard()
+                activePlayer = players[0];
+                printNewRound();
+                return true
+            }
+
+        game.switchPlayerTurn();
+        game.printNewRound();
+        return true
+        } else {
+         alert("This cell is not available. Choose again.")
+        }
+    })
+    const square3 = document.querySelector(".square3 ")
+    square3.textContent = currentBoard[0][2].getValue();
+    square3.addEventListener("click", () => {
+        if (square3.textContent === "0") {
+        square3.textContent = game.getActivePlayer().token;
+        currentBoard[0][2].addToken(game.getActivePlayer().token)
+
+                 // Decide on winner 
+            if (gameOver === true) {
+                alert(`This is the end of the game. Do you want to play a new game?`)
+                board.resetBoard()
+                activePlayer = players[0];
+                printNewRound();
+                return true
+            }
+        game.switchPlayerTurn();
+        game.printNewRound();
+        return true
+        } else {
+         alert("This cell is not available. Choose again.")
+        }
+    })
+    const square4 = document.querySelector(".square4")
+    square4.textContent = currentBoard[1][0].getValue();
+    square4.addEventListener("click", () => {
+        if (square4.textContent === "0") {
+        square4.textContent = game.getActivePlayer().token;
+        currentBoard[1][0].addToken(game.getActivePlayer().token)
+                 // Decide on winner 
+            if (gameOver === true) {
+                alert(`This is the end of the game. Do you want to play a new game?`)
+                board.resetBoard()
+                activePlayer = players[0];
+                printNewRound();
+                return true
+            }
+        game.switchPlayerTurn();
+        game.printNewRound();
+        return true
+        } else {
+         alert("This cell is not available. Choose again.")
+        }
+    })
+    const square5 = document.querySelector(".square5")
+    square5.textContent = currentBoard[1][1].getValue();
+    square5.addEventListener("click", () => {
+        if (square5.textContent === "0") {
+        square5.textContent = game.getActivePlayer().token;
+        currentBoard[1][1].addToken(game.getActivePlayer().token)
+                    // Decide on winner 
+            if (gameOver === true) {
+                alert(`This is the end of the game. Do you want to play a new game?`)
+                board.resetBoard()
+                activePlayer = players[0];
+                printNewRound();
+                return true
+            }
+        game.switchPlayerTurn();
+        game.printNewRound();
+        return true
+        } else {
+         alert("This cell is not available. Choose again.")
+        }
+    })
+    const square6 = document.querySelector(".square6")
+    square6.textContent = currentBoard[1][2].getValue();
+    square6.addEventListener("click", () => {
+        if (square6.textContent === "0") {
+        square6.textContent = game.getActivePlayer().token;
+        currentBoard[1][2].addToken(game.getActivePlayer().token)
+                 // Decide on winner 
+            if (gameOver === true) {
+                alert(`This is the end of the game. Do you want to play a new game?`)
+                board.resetBoard()
+                activePlayer = players[0];
+                printNewRound();
+                return true
+            }
+        game.switchPlayerTurn();
+        game.printNewRound();
+        return true
+        } else {
+         alert("This cell is not available. Choose again.")
+        }
+    })
+    const square7 = document.querySelector(".square7")
+    square7.textContent = currentBoard[2][0].getValue();
+    square7.addEventListener("click", () => {
+        if (square7.textContent === "0") {
+        square7.textContent = game.getActivePlayer().token;
+        currentBoard[2][0].addToken(game.getActivePlayer().token)
+                 // Decide on winner 
+            if (gameOver === true) {
+                alert(`This is the end of the game. Do you want to play a new game?`)
+                board.resetBoard()
+                activePlayer = players[0];
+                printNewRound();
+                return true
+            }
+        game.switchPlayerTurn();
+        game.printNewRound();
+        return true
+        } else {
+         alert("This cell is not available. Choose again.")
+        }
+    })
+    const square8 = document.querySelector(".square8")
+    square8.textContent = currentBoard[2][1].getValue();
+    square8.addEventListener("click", () => {
+        if (square8.textContent === "0") {
+        square8.textContent = game.getActivePlayer().token;
+        currentBoard[2][1].addToken(game.getActivePlayer().token)
+                 // Decide on winner 
+            if (gameOver === true) {
+                alert(`This is the end of the game. Do you want to play a new game?`)
+                board.resetBoard()
+                activePlayer = players[0];
+                printNewRound();
+                return true
+            }
+        game.switchPlayerTurn();
+        game.printNewRound();
+        return true
+        } else {
+         alert("This cell is not available. Choose again.")
+        }
+    })
+    const square9 = document.querySelector(".square9")
+    square9.textContent = currentBoard[2][2].getValue();
+    square9.addEventListener("click", () => {
+        if (square9.textContent === "0") {
+        square9.textContent = game.getActivePlayer().token;
+        currentBoard[2][2].addToken(game.getActivePlayer().token)
+                    // Decide on winner 
+            if (gameOver === true) {
+                alert(`This is the end of the game. Do you want to play a new game?`)
+                board.resetBoard()
+                activePlayer = players[0];
+                printNewRound();
+                return true
+            }
+        game.switchPlayerTurn();
+        game.printNewRound();
+        return true
+        } else {
+         alert("This cell is not available. Choose again.")
+        }
+    })
+    
+    };
+
+    return {
+        renderDisplay,
+    }
+
+
+
+
+
+
+
+}
+
+
+const show = renderContent(game);
+
+show.renderDisplay()
