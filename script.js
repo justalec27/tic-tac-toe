@@ -96,7 +96,7 @@ function GameController(
     const rows = currentBoard.length;
     const columns = currentBoard[0].length
 
-    const players = [{ name: playerOneName, token: 1}, { name: playerTwoName, token: 2}];
+    const players = [{ name: playerOneName, token: "X"}, { name: playerTwoName, token: "O"}];
 
     let activePlayer = players[0];
 
@@ -121,16 +121,16 @@ function GameController(
         // Check all rows
 
         for (let i = 0; i < rows ; i++){
-            if (currentBoard[i][0].getValue() === 1  && 
-                currentBoard[i][1].getValue() === 1  && 
-                currentBoard[i][2].getValue() === 1  
+            if (currentBoard[i][0].getValue() === "X"  && 
+                currentBoard[i][1].getValue() === "X"  && 
+                currentBoard[i][2].getValue() === "X"  
         ){
             document.querySelector(".winner").textContent = `The winner is ${playerOneName}!`
             return true;
         } else if (
-                currentBoard[i][0].getValue() === 2  && 
-                currentBoard[i][1].getValue() === 2  && 
-                currentBoard[i][2].getValue() === 2  
+                currentBoard[i][0].getValue() === "O"  && 
+                currentBoard[i][1].getValue() === "O"  && 
+                currentBoard[i][2].getValue() === "O"  
         ) {
             document.querySelector(".winner").textContent = `The winner is ${playerTwoName}!`
             return true;
@@ -138,16 +138,16 @@ function GameController(
         // Check all columns
 
        for (let j = 0; j < columns; j++){
-            if (currentBoard[0][j].getValue() === 1  && 
-                currentBoard[1][j].getValue() === 1  && 
-                currentBoard[2][j].getValue() === 1  
+            if (currentBoard[0][j].getValue() === "X"  && 
+                currentBoard[1][j].getValue() === "X"  && 
+                currentBoard[2][j].getValue() === "X"  
         ){
             document.querySelector(".winner").textContent = `The winner is ${playerOneName}!`
             return true;
         } else if (
-                currentBoard[0][j].getValue() === 2  && 
-                currentBoard[1][j].getValue() === 2  && 
-                currentBoard[2][j].getValue() === 2  
+                currentBoard[0][j].getValue() === "O"  && 
+                currentBoard[1][j].getValue() === "O"  && 
+                currentBoard[2][j].getValue() === "O"  
         ) {
             document.querySelector(".winner").textContent = `The winner is ${playerTwoName}!`
             return true;
@@ -155,30 +155,30 @@ function GameController(
         }
 
         // Check all diagonals
-        if (    currentBoard[0][0].getValue() === 1  && 
-                currentBoard[1][1].getValue() === 1  && 
-                currentBoard[2][2].getValue() === 1  
+        if (    currentBoard[0][0].getValue() === "X"  && 
+                currentBoard[1][1].getValue() === "X"  && 
+                currentBoard[2][2].getValue() === "X"
         ){
             document.querySelector(".winner").textContent = `The winner is ${playerOneName}!`
              return true;
         } else if ( 
-                currentBoard[2][0].getValue() === 1  && 
-                currentBoard[1][1].getValue() === 1  && 
-                currentBoard[0][2].getValue() === 1  
+                currentBoard[2][0].getValue() === "X"  && 
+                currentBoard[1][1].getValue() === "X"  && 
+                currentBoard[0][2].getValue() === "X"  
         ) {
             document.querySelector(".winner").textContent = `The winner is ${playerOneName}!`
             return true;
         } else if (    
-                currentBoard[0][0].getValue() === 2  && 
-                currentBoard[1][1].getValue() === 2  && 
-                currentBoard[2][2].getValue() === 2  
+                currentBoard[0][0].getValue() === "O"  && 
+                currentBoard[1][1].getValue() === "O"  && 
+                currentBoard[2][2].getValue() === "O"  
         ){
             document.querySelector(".winner").textContent = `The winner is ${playerTwoName}!`
              return true;
         } else if ( 
-                currentBoard[2][0].getValue() === 2  && 
-                currentBoard[1][1].getValue() === 2  && 
-                currentBoard[0][2].getValue() === 2  
+                currentBoard[2][0].getValue() === "O"  && 
+                currentBoard[1][1].getValue() === "O"  && 
+                currentBoard[0][2].getValue() === "O"  
         ) {
             document.querySelector(".winner").textContent = `The winner is ${playerTwoName}!`
             return true;
@@ -291,91 +291,100 @@ function renderContent() {
     const square9 = document.querySelector(".square9");
 
 
-    square1.textContent = currentBoard[0][0].getValue();
     square1.addEventListener("click", () => {
-        if (square1.textContent === "0") {
+        if (square1.textContent === "") {
         square1.textContent = game.getActivePlayer().token;
         game.playRound(0,0)
+        square1.textContent = currentBoard[0][0].getValue();
+
  
         } else {
          alert("That move is not possible. Choose again.")
         }
 
     })
-    square2.textContent = currentBoard[0][1].getValue();
+    
     square2.addEventListener("click", () => {
-        if (square2.textContent === "0") {
+        if (square2.textContent === "") {
         square2.textContent = game.getActivePlayer().token;
         game.playRound(0,1)
+        square2.textContent = currentBoard[0][1].getValue();
 
         } else {
          alert("This cell is not available. Choose again.")
         }
     })
 
-    square3.textContent = currentBoard[0][2].getValue();
     square3.addEventListener("click", () => {
-        if (square3.textContent === "0") {
+        if (square3.textContent === "") {
         square3.textContent = game.getActivePlayer().token;
         game.playRound(0,2)
+        square3.textContent = currentBoard[0][2].getValue();
+
         
         } else {
          alert("This cell is not available. Choose again.")
         }
     })
-    square4.textContent = currentBoard[1][0].getValue();
     square4.addEventListener("click", () => {
-        if (square4.textContent === "0") {
+        if (square4.textContent === "") {
         square4.textContent = game.getActivePlayer().token;
         game.playRound(1,0)
+        square4.textContent = currentBoard[1][0].getValue();
+
         } else {
          alert("This cell is not available. Choose again.")
         }
     })
-    square5.textContent = currentBoard[1][1].getValue();
     square5.addEventListener("click", () => {
-        if (square5.textContent === "0") {
+        if (square5.textContent === "") {
         square5.textContent = game.getActivePlayer().token;
         game.playRound(1,1)
+        square5.textContent = currentBoard[1][1].getValue();
+
 
         } else {
          alert("This cell is not available. Choose again.")
         }
     })
-    square6.textContent = currentBoard[1][2].getValue();
     square6.addEventListener("click", () => {
-        if (square6.textContent === "0") {
+        if (square6.textContent === "") {
         square6.textContent = game.getActivePlayer().token;
         game.playRound(1,2)
+        square6.textContent = currentBoard[1][2].getValue();
+
 
         } else {
          alert("This cell is not available. Choose again.")
         }
     })
-    square7.textContent = currentBoard[2][0].getValue();
     square7.addEventListener("click", () => {
-        if (square7.textContent === "0") {
+        if (square7.textContent === "") {
         square7.textContent = game.getActivePlayer().token;
         game.playRound(2,0)
+        square7.textContent = currentBoard[2][0].getValue();
+
         
         } else {
          alert("This cell is not available. Choose again.")
         }
     })
-    square8.textContent = currentBoard[2][1].getValue();
     square8.addEventListener("click", () => {
-        if (square8.textContent === "0") {
+        if (square8.textContent === "") {
         square8.textContent = game.getActivePlayer().token;
         game.playRound(2,1)
+        square8.textContent = currentBoard[2][1].getValue();
+
         } else {
          alert("This cell is not available. Choose again.")
         }
     })
-    square9.textContent = currentBoard[2][2].getValue();
     square9.addEventListener("click", () => {
-        if (square9.textContent === "0") {
+        if (square9.textContent === "") {
         square9.textContent = game.getActivePlayer().token;
         game.playRound(2,2)
+        square9.textContent = currentBoard[2][2].getValue();
+
         } else {
          alert("This cell is not available. Choose again.")
         }
