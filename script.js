@@ -6,16 +6,6 @@ fix renderDisplay function()
 
 
 */
-const square1= document.querySelector(".square1");
-const square2= document.querySelector(".square2");
-const square3 = document.querySelector(".square3 ");
-const square4 = document.querySelector(".square4");
-const square5 = document.querySelector(".square5");
-const square6 = document.querySelector(".square6");
-const square7 = document.querySelector(".square7");
-const square8 = document.querySelector(".square8");
-const square9 = document.querySelector(".square9");
-
 
 
 function GameBoard() {
@@ -61,27 +51,12 @@ function GameBoard() {
         }
     };
 
-    const resetScreen = () => {
-        square1.textContent = currentBoard[0][0].getValue() 
-        square2.textContent = currentBoard[0][1].getValue()
-        square3.textContent = currentBoard[0][2].getValue()
-        square4.textContent = currentBoard[1][0].getValue()
-        square5.textContent = currentBoard[1][1].getValue()
-        square6.textContent = currentBoard[1][2].getValue()
-        square7.textContent = currentBoard[2][0].getValue()
-        square8.textContent = currentBoard[2][1].getValue()
-        square9.textContent = currentBoard[2][2].getValue()
-
-    }
-
-
     return {
         getBoard,
         printBoard,
         dropToken,
         checkAvailability,
         resetBoard,
-        resetScreen,
     };
 }
 
@@ -117,6 +92,9 @@ function GameController(
     ) {
     
     const board = GameBoard();
+    const currentBoard = board.getBoard()
+    const rows = currentBoard.length;
+    const columns = currentBoard[0].length
 
     const players = [{ name: playerOneName, token: 1}, { name: playerTwoName, token: 2}];
 
@@ -139,9 +117,7 @@ function GameController(
 
     const checkWinner = () => {
         
-        const currentBoard = board.getBoard()
-        const rows = currentBoard.length;
-        const columns = currentBoard[0].length
+     
         // Check all rows
 
         for (let i = 0; i < rows ; i++){
@@ -149,14 +125,14 @@ function GameController(
                 currentBoard[i][1].getValue() === 1  && 
                 currentBoard[i][2].getValue() === 1  
         ){
-            console.log(`The winner is ${playerOneName}`)
+            document.querySelector(".winner-status").textContent = `Congratulations, the winner is ${playerOneName}`
             return true;
         } else if (
                 currentBoard[i][0].getValue() === 2  && 
                 currentBoard[i][1].getValue() === 2  && 
                 currentBoard[i][2].getValue() === 2  
         ) {
-            console.log(`The winner is ${playerTwoName}`)
+            document.querySelector(".winner-status").textContent = `Congratulations, the winner is ${playerTwoName}`
             return true;
         }
         // Check all columns
@@ -166,14 +142,14 @@ function GameController(
                 currentBoard[1][j].getValue() === 1  && 
                 currentBoard[2][j].getValue() === 1  
         ){
-            console.log(`The winner is ${playerOneName}`)
+            document.querySelector(".winner-status").textContent = `Congratulations, the winner is ${playerOneName}`
             return true;
         } else if (
                 currentBoard[0][j].getValue() === 2  && 
                 currentBoard[1][j].getValue() === 2  && 
                 currentBoard[2][j].getValue() === 2  
         ) {
-            console.log(`The winner is ${playerTwoName}`)
+            document.querySelector(".winner-status").textContent = `Congratulations, the winner is ${playerTwoName}`
             return true;
         }}
         }
@@ -183,28 +159,28 @@ function GameController(
                 currentBoard[1][1].getValue() === 1  && 
                 currentBoard[2][2].getValue() === 1  
         ){
-             console.log(`The winner is ${playerOneName}`)
+             document.querySelector(".winner-status").textContent = `Congratulations, the winner is ${playerOneName}`
              return true;
         } else if ( 
                 currentBoard[2][0].getValue() === 1  && 
                 currentBoard[1][1].getValue() === 1  && 
                 currentBoard[0][2].getValue() === 1  
         ) {
-            console.log(`The winner is ${playerOneName}`)
+           document.querySelector(".winner-status").textContent = `Congratulations, the winner is ${playerOneName}`
             return true;
         } else if (    
                 currentBoard[0][0].getValue() === 2  && 
                 currentBoard[1][1].getValue() === 2  && 
                 currentBoard[2][2].getValue() === 2  
         ){
-             console.log(`The winner is ${playerTwoName}`)
+             document.querySelector(".winner-status").textContent = `Congratulations, the winner is ${playerTwoName}`
              return true;
         } else if ( 
                 currentBoard[2][0].getValue() === 2  && 
                 currentBoard[1][1].getValue() === 2  && 
                 currentBoard[0][2].getValue() === 2  
         ) {
-            console.log(`The winner is ${playerTwoName}`)
+            document.querySelector(".winner-status").textContent = `Congratulations, the winner is ${playerTwoName}`
             return true;
         } else 
 
@@ -221,6 +197,18 @@ function GameController(
         return true
     }
 
+    function resetDisplay () {
+        document.querySelector(".square1").textContent = currentBoard[0][0].getValue();
+        document.querySelector(".square2").textContent = currentBoard[0][1].getValue();
+        document.querySelector(".square3").textContent = currentBoard[0][2].getValue();
+        document.querySelector(".square4").textContent = currentBoard[1][0].getValue();
+        document.querySelector(".square5").textContent = currentBoard[1][1].getValue();
+        document.querySelector(".square6").textContent = currentBoard[1][2].getValue();
+        document.querySelector(".square7").textContent = currentBoard[2][0].getValue();
+        document.querySelector(".square8").textContent = currentBoard[2][1].getValue();
+        document.querySelector(".square9").textContent = currentBoard[2][2].getValue();
+
+    }
 
     const playRound = (row, column) => {
     //Drop a token for the current player
@@ -234,11 +222,12 @@ function GameController(
         // Decide on winner 
         const gameOver = checkWinner();
         if (gameOver === true) {
+            
             console.log(`This is the end of the game. Do you want to play a new game?`)
             board.resetBoard();
-            board.resetScreen();
             activePlayer = players[0];
             printNewRound();
+            // resetDisplay()
             return true
         }
 
@@ -270,7 +259,17 @@ function renderContent() {
     const currentBoard = game.getBoard();
     const gameOver = game.checkWinner();
 
-    const square1= document.querySelector(".square1");
+    const square1 = document.querySelector(".square1");
+    const square2 = document.querySelector(".square2");
+    const square3 = document.querySelector(".square3 ");
+    const square4 = document.querySelector(".square4");
+    const square5 = document.querySelector(".square5");
+    const square6 = document.querySelector(".square6");
+    const square7 = document.querySelector(".square7");
+    const square8 = document.querySelector(".square8");
+    const square9 = document.querySelector(".square9");
+
+
     square1.textContent = currentBoard[0][0].getValue();
     square1.addEventListener("click", () => {
         if (square1.textContent === "0") {
@@ -360,7 +359,12 @@ function renderContent() {
          alert("This cell is not available. Choose again.")
         }
    
-})
+    })
+
+  
+
+    return {
+    }
 }
 
 const show = renderContent();
