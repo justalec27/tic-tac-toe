@@ -117,8 +117,7 @@ function GameController(
     }
 
     const checkWinner = () => {
-        
-     
+          
         // Check all rows
 
         for (let i = 0; i < rows ; i++){
@@ -126,14 +125,14 @@ function GameController(
                 currentBoard[i][1].getValue() === 1  && 
                 currentBoard[i][2].getValue() === 1  
         ){
-            document.querySelector(".winner-status").textContent = `Congratulations, the winner is ${playerOneName}`
+            document.querySelector(".winner").textContent = `The winner is ${playerOneName}!`
             return true;
         } else if (
                 currentBoard[i][0].getValue() === 2  && 
                 currentBoard[i][1].getValue() === 2  && 
                 currentBoard[i][2].getValue() === 2  
         ) {
-            document.querySelector(".winner-status").textContent = `Congratulations, the winner is ${playerTwoName}`
+            document.querySelector(".winner").textContent = `The winner is ${playerTwoName}!`
             return true;
         }
         // Check all columns
@@ -143,14 +142,14 @@ function GameController(
                 currentBoard[1][j].getValue() === 1  && 
                 currentBoard[2][j].getValue() === 1  
         ){
-            document.querySelector(".winner-status").textContent = `Congratulations, the winner is ${playerOneName}`
+            document.querySelector(".winner").textContent = `The winner is ${playerOneName}!`
             return true;
         } else if (
                 currentBoard[0][j].getValue() === 2  && 
                 currentBoard[1][j].getValue() === 2  && 
                 currentBoard[2][j].getValue() === 2  
         ) {
-            document.querySelector(".winner-status").textContent = `Congratulations, the winner is ${playerTwoName}`
+            document.querySelector(".winner").textContent = `The winner is ${playerTwoName}!`
             return true;
         }}
         }
@@ -160,41 +159,41 @@ function GameController(
                 currentBoard[1][1].getValue() === 1  && 
                 currentBoard[2][2].getValue() === 1  
         ){
-             document.querySelector(".winner-status").textContent = `Congratulations, the winner is ${playerOneName}`
+            document.querySelector(".winner").textContent = `The winner is ${playerOneName}!`
              return true;
         } else if ( 
                 currentBoard[2][0].getValue() === 1  && 
                 currentBoard[1][1].getValue() === 1  && 
                 currentBoard[0][2].getValue() === 1  
         ) {
-           document.querySelector(".winner-status").textContent = `Congratulations, the winner is ${playerOneName}`
+            document.querySelector(".winner").textContent = `The winner is ${playerOneName}!`
             return true;
         } else if (    
                 currentBoard[0][0].getValue() === 2  && 
                 currentBoard[1][1].getValue() === 2  && 
                 currentBoard[2][2].getValue() === 2  
         ){
-             document.querySelector(".winner-status").textContent = `Congratulations, the winner is ${playerTwoName}`
+            document.querySelector(".winner").textContent = `The winner is ${playerTwoName}!`
              return true;
         } else if ( 
                 currentBoard[2][0].getValue() === 2  && 
                 currentBoard[1][1].getValue() === 2  && 
                 currentBoard[0][2].getValue() === 2  
         ) {
-            document.querySelector(".winner-status").textContent = `Congratulations, the winner is ${playerTwoName}`
+            document.querySelector(".winner").textContent = `The winner is ${playerTwoName}!`
             return true;
         } else 
 
         // Check for a tie
-        for (let i = 0; i < 3; i++){
-            for (let j = 0; j < 3; j++){
+        for (let i = 0; i < rows ; i++){
+            for (let j = 0; j < columns; j++){
                 if (currentBoard[i][j].getValue() === 0){
                     //when empty cell found
                     return false;
                 }
             }
         }
-        document.querySelector(".winner-status").textContent = `It's a tie`
+        document.querySelector(".winner").textContent = `It's a tie`
         return true
     }
 
@@ -211,6 +210,27 @@ function GameController(
 
     }
 
+     function clickNo() {
+        const noButton = document.querySelector(".noBtn")
+        noButton.addEventListener("click", () => {
+            document.querySelector(".popup").close()
+        })
+    }
+
+    function clickYes() {
+        const yesButton = document.querySelector(".yesBtn")
+        yesButton.addEventListener("click", () => {
+            game.resetDisplay()
+            board.resetBoard();
+            document.querySelector(".players-turn").textContent = `It's ${activePlayer.name}'s turn`
+            document.querySelector(".popup").close()
+        })
+    }
+
+    clickNo()
+    clickYes()
+   
+
     const playRound = (row, column) => {
     //Drop a token for the current player
         
@@ -223,12 +243,11 @@ function GameController(
         // Decide on winner 
         const gameOver = checkWinner();
         if (gameOver === true) {
+            document.querySelector("dialog").showModal()
             
-            console.log(`This is the end of the game. Do you want to play a new game?`)
             board.resetBoard();
             activePlayer = players[0];
             printNewRound();
-            // resetDisplay()
             return true
         }
 
@@ -250,6 +269,7 @@ function GameController(
         getBoard: board.getBoard,
         printBoard: board.printBoard,
         checkWinner,
+        resetDisplay,
     }
 }
 
@@ -278,7 +298,7 @@ function renderContent() {
         game.playRound(0,0)
  
         } else {
-         alert("This cell is not available. Choose again.")
+         alert("That move is not possible. Choose again.")
         }
 
     })
@@ -362,10 +382,7 @@ function renderContent() {
    
     })
 
-  
-
-    return {
-    }
+   
 }
 
 const show = renderContent();
