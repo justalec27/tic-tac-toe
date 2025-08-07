@@ -106,6 +106,7 @@ function GameController(
         } else {
         activePlayer = players[0];
         }
+        document.querySelector(".players-turn").textContent = `It's ${activePlayer.name}'s turn`
     };
 
     const getActivePlayer = () => activePlayer
@@ -193,7 +194,7 @@ function GameController(
                 }
             }
         }
-        console.log(`It's a tie.`)
+        document.querySelector(".winner-status").textContent = `It's a tie`
         return true
     }
 
