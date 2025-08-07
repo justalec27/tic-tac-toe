@@ -241,8 +241,6 @@ const game = GameController();
 
 function renderContent() {
 
-    const renderDisplay = () => {
-     
     const currentBoard = game.getBoard();
     const gameOver = game.checkWinner();
 
@@ -251,20 +249,8 @@ function renderContent() {
     square1.addEventListener("click", () => {
         if (square1.textContent === "0") {
         square1.textContent = game.getActivePlayer().token;
-        currentBoard[0][0].addToken(game.getActivePlayer().token)
-
-         // Decide on winner 
-        if (gameOver === true) {
-            alert(`This is the end of the game. Do you want to play a new game?`)
-            board.resetBoard()
-            activePlayer = players[0];
-            printNewRound();
-            return true
-        }
-
-        game.switchPlayerTurn();
-        game.printNewRound();
-        return true
+        game.playRound(0,0)
+ 
         } else {
          alert("This cell is not available. Choose again.")
         }
@@ -275,20 +261,8 @@ function renderContent() {
     square2.addEventListener("click", () => {
         if (square2.textContent === "0") {
         square2.textContent = game.getActivePlayer().token;
-        currentBoard[0][1].addToken(game.getActivePlayer().token)
+        game.playRound(0,1)
 
-            // Decide on winner 
-            if (gameOver === true) {
-                alert(`This is the end of the game. Do you want to play a new game?`)
-                board.resetBoard()
-                activePlayer = players[0];
-                printNewRound();
-                return true
-            }
-
-        game.switchPlayerTurn();
-        game.printNewRound();
-        return true
         } else {
          alert("This cell is not available. Choose again.")
         }
@@ -298,19 +272,8 @@ function renderContent() {
     square3.addEventListener("click", () => {
         if (square3.textContent === "0") {
         square3.textContent = game.getActivePlayer().token;
-        currentBoard[0][2].addToken(game.getActivePlayer().token)
-
-                 // Decide on winner 
-            if (gameOver === true) {
-                alert(`This is the end of the game. Do you want to play a new game?`)
-                board.resetBoard()
-                activePlayer = players[0];
-                printNewRound();
-                return true
-            }
-        game.switchPlayerTurn();
-        game.printNewRound();
-        return true
+        game.playRound(0,2)
+        
         } else {
          alert("This cell is not available. Choose again.")
         }
@@ -320,18 +283,7 @@ function renderContent() {
     square4.addEventListener("click", () => {
         if (square4.textContent === "0") {
         square4.textContent = game.getActivePlayer().token;
-        currentBoard[1][0].addToken(game.getActivePlayer().token)
-                 // Decide on winner 
-            if (gameOver === true) {
-                alert(`This is the end of the game. Do you want to play a new game?`)
-                board.resetBoard()
-                activePlayer = players[0];
-                printNewRound();
-                return true
-            }
-        game.switchPlayerTurn();
-        game.printNewRound();
-        return true
+        game.playRound(1,0)
         } else {
          alert("This cell is not available. Choose again.")
         }
@@ -341,18 +293,8 @@ function renderContent() {
     square5.addEventListener("click", () => {
         if (square5.textContent === "0") {
         square5.textContent = game.getActivePlayer().token;
-        currentBoard[1][1].addToken(game.getActivePlayer().token)
-                    // Decide on winner 
-            if (gameOver === true) {
-                alert(`This is the end of the game. Do you want to play a new game?`)
-                board.resetBoard()
-                activePlayer = players[0];
-                printNewRound();
-                return true
-            }
-        game.switchPlayerTurn();
-        game.printNewRound();
-        return true
+        game.playRound(1,1)
+
         } else {
          alert("This cell is not available. Choose again.")
         }
@@ -362,18 +304,8 @@ function renderContent() {
     square6.addEventListener("click", () => {
         if (square6.textContent === "0") {
         square6.textContent = game.getActivePlayer().token;
-        currentBoard[1][2].addToken(game.getActivePlayer().token)
-                 // Decide on winner 
-            if (gameOver === true) {
-                alert(`This is the end of the game. Do you want to play a new game?`)
-                board.resetBoard()
-                activePlayer = players[0];
-                printNewRound();
-                return true
-            }
-        game.switchPlayerTurn();
-        game.printNewRound();
-        return true
+        game.playRound(1,2)
+
         } else {
          alert("This cell is not available. Choose again.")
         }
@@ -383,18 +315,8 @@ function renderContent() {
     square7.addEventListener("click", () => {
         if (square7.textContent === "0") {
         square7.textContent = game.getActivePlayer().token;
-        currentBoard[2][0].addToken(game.getActivePlayer().token)
-                 // Decide on winner 
-            if (gameOver === true) {
-                alert(`This is the end of the game. Do you want to play a new game?`)
-                board.resetBoard()
-                activePlayer = players[0];
-                printNewRound();
-                return true
-            }
-        game.switchPlayerTurn();
-        game.printNewRound();
-        return true
+        game.playRound(1,2)
+        
         } else {
          alert("This cell is not available. Choose again.")
         }
@@ -405,14 +327,16 @@ function renderContent() {
         if (square8.textContent === "0") {
         square8.textContent = game.getActivePlayer().token;
         currentBoard[2][1].addToken(game.getActivePlayer().token)
-                 // Decide on winner 
-            if (gameOver === true) {
-                alert(`This is the end of the game. Do you want to play a new game?`)
-                board.resetBoard()
-                activePlayer = players[0];
-                printNewRound();
-                return true
-            }
+        
+        console.log(gameOver)
+                // Decide on winner 
+        if (gameOver === true) {
+            alert(`This is the end of the game. Do you want to play a new game?`)
+            board.resetBoard()
+            activePlayer = players[0];
+            printNewRound();
+            return true
+        }
         game.switchPlayerTurn();
         game.printNewRound();
         return true
@@ -426,37 +350,27 @@ function renderContent() {
         if (square9.textContent === "0") {
         square9.textContent = game.getActivePlayer().token;
         currentBoard[2][2].addToken(game.getActivePlayer().token)
-                    // Decide on winner 
-            if (gameOver === true) {
-                alert(`This is the end of the game. Do you want to play a new game?`)
-                board.resetBoard()
-                activePlayer = players[0];
-                printNewRound();
-                return true
-            }
+        console.log(gameOver)
+                // Decide on winner 
+        if (gameOver === true) {
+            alert(`This is the end of the game. Do you want to play a new game?`)
+            board.resetBoard()
+            activePlayer = players[0];
+            printNewRound();
+            return true
+        }
         game.switchPlayerTurn();
         game.printNewRound();
         return true
         } else {
          alert("This cell is not available. Choose again.")
         }
-    })
     
-    };
-
+   
     return {
         renderDisplay,
     }
-
-
-
-
-
-
-
+})
 }
 
-
-const show = renderContent(game);
-
-show.renderDisplay()
+const show = renderContent();
