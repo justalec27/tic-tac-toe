@@ -218,18 +218,30 @@ function GameController(
     function clickYes() {
         const yesButton = document.querySelector(".yesBtn")
         yesButton.addEventListener("click", () => {
-            game.resetDisplay()
+            game.resetDisplay();
             board.resetBoard();
+            activePlayer = players[0];
             document.querySelector(".players-turn").textContent = `It's ${activePlayer.name}'s turn`
             document.querySelector(".popup").close()
-    
-            activePlayer = players[0];
+
 
         })
     }
 
+     function clickRestart() {
+        const restartbutton = document.querySelector(".restart")
+        restartbutton.addEventListener("click", () => {
+            game.resetDisplay();
+            board.resetBoard();
+            activePlayer = players[0];
+            document.querySelector(".players-turn").textContent = `It's ${activePlayer.name}'s turn`
+        })
+
+     }
+
     clickNo()
     clickYes()
+    clickRestart()
    
 
     const playRound = (row, column) => {
@@ -381,6 +393,8 @@ function renderContent() {
         }
    
     })
+
+   
 
    
 }
