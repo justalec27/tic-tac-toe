@@ -13,6 +13,11 @@
     <div class="game-wrapper">
         <div class="game-info">
             <h1>Game rules</h1>
+            <p>
+                Tic-tac-toe is a two-player game played on a 3x3 grid. Players take turns marking spaces with 'X' or 'O'. 
+                The first player to get three of their symbols in a row (horizontally, vertically, or diagonally) wins.
+                 If all spaces are filled and no one has three in a row, the game is a draw. 
+            </p>
             <button class="restart">Restart Game</button>
             <button class="input">Input names</button>
 
@@ -35,12 +40,14 @@
             </dialog>
             <dialog class="userInput">
                 <form action="1231.com" method="post" id="form">
+                    <fieldset>
                     <p>Enter player names</p>
-                    <label for="player1Name"></label>
+                    <!-- <label for="player1Name"></label> -->
                     <input type="text" id="player1Name" name="player1Name" placeholder="Player One" required>
-                    <label for="player2Name"></label>
+                    <!-- <label for="player2Name"></label> -->
                     <input type="text" id="player2Name" name="player2Name" placeholder="Player Two" required>
                     <input type="submit" id="submitBtn">
+                    </fieldset>
                 </form>
             </dialog>
         </div>        

@@ -48,7 +48,7 @@ p {
     justify-content: center;
     align-items: center;
     text-align: center;
-    border: 1px solid red;
+    background-color: beige;
     height: 500px;
     width: 500px;
 }
@@ -60,7 +60,7 @@ p {
     justify-content: center;
     align-items: center;
     text-align: center;
-    border: 1px solid red;
+    /* border: 1px solid red; */
     height: 500px;
     width: 500px;
 
@@ -86,4 +86,83 @@ dialog p {
 
 ::backdrop {
   background-color: beige;
+}
+
+::after {
+    background-color: blue;
+}
+
+dialog .userInput {
+    height: 300px;
+    width: 200px;
+    background-color:  tomato;
+    border: none;
+}
+
+
+#submitBtn {
+    height: 45px;
+    width: 200px;
+    font-size: 24px;
+    border: none;
+    background-color: tomato;
+    border-radius: 25px;
+    color: white;
+    font-weight: bold;
+}
+
+.userInput:open {
+  border: none;
+  height: 400px;
+  width: 300px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+} 
+
+fieldset {
+    display: grid;
+    justify-content: space-around;
+    align-items: center;
+    height: 320px;
+    border: none;
+}
+
+
+fieldset p {
+    font-size: 24px;    
+    text-align: center;
+    font-weight: bold;
+}
+
+#submitBtn {
+    justify-self: center;
+    width: 250px;
+}
+
+fieldset input {
+    height: 50px;
+    border-radius: 20px;
+    font-size: larger;
+    border: none;
+    color: white;
+    font-weight: bold;
+}
+
+#player2Name {
+    background-color: rgb(69, 112, 238);
+    padding-left: 20px;
+}
+
+#player1Name {
+    background-color: rgb(242, 118, 118);
+    padding-left: 20px;
+}
+
+::placeholder {
+    font-weight: bold;
+    color: white;
+}
+
+textarea:focus, input:focus{
+    outline: none;
 }

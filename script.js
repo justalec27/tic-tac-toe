@@ -4,6 +4,7 @@ Update 6 aug:
 the last icon is always 0 instead of O or X when winning. Check the bug
 
 */
+document.querySelector(".userInput").showModal() 
 
 function GameBoard() {
     //Create the board for the game, 3x3 grid
