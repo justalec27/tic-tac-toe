@@ -1,9 +1,7 @@
 /*
-Update 5 aug: 
+Update 6 aug: 
 
-The game is working in developer. Now I need to display everything in the browser.
-fix renderDisplay function()
-
+the last icon is always 0 instead of O or X when winning. Check the bug
 
 */
 
@@ -198,15 +196,15 @@ function GameController(
     }
 
     function resetDisplay () {
-        document.querySelector(".square1").textContent = currentBoard[0][0].getValue();
-        document.querySelector(".square2").textContent = currentBoard[0][1].getValue();
-        document.querySelector(".square3").textContent = currentBoard[0][2].getValue();
-        document.querySelector(".square4").textContent = currentBoard[1][0].getValue();
-        document.querySelector(".square5").textContent = currentBoard[1][1].getValue();
-        document.querySelector(".square6").textContent = currentBoard[1][2].getValue();
-        document.querySelector(".square7").textContent = currentBoard[2][0].getValue();
-        document.querySelector(".square8").textContent = currentBoard[2][1].getValue();
-        document.querySelector(".square9").textContent = currentBoard[2][2].getValue();
+        document.querySelector(".square1").textContent = ""
+        document.querySelector(".square2").textContent = ""
+        document.querySelector(".square3").textContent = ""
+        document.querySelector(".square4").textContent = ""
+        document.querySelector(".square5").textContent = ""
+        document.querySelector(".square6").textContent = ""
+        document.querySelector(".square7").textContent = ""
+        document.querySelector(".square8").textContent = ""
+        document.querySelector(".square9").textContent = ""
 
     }
 
@@ -224,6 +222,9 @@ function GameController(
             board.resetBoard();
             document.querySelector(".players-turn").textContent = `It's ${activePlayer.name}'s turn`
             document.querySelector(".popup").close()
+    
+            activePlayer = players[0];
+
         })
     }
 
@@ -245,15 +246,15 @@ function GameController(
         if (gameOver === true) {
             document.querySelector("dialog").showModal()
             
-            board.resetBoard();
-            activePlayer = players[0];
-            printNewRound();
+            // board.resetBoard();
+            // activePlayer = players[0];
+            // printNewRound();
             return true
         }
 
         // Switch player turn
         switchPlayerTurn();
-        printNewRound();
+        // printNewRound();
         return true
         }};
         
@@ -295,8 +296,6 @@ function renderContent() {
         if (square1.textContent === "") {
         square1.textContent = game.getActivePlayer().token;
         game.playRound(0,0)
-        square1.textContent = currentBoard[0][0].getValue();
-
  
         } else {
          alert("That move is not possible. Choose again.")
@@ -308,7 +307,6 @@ function renderContent() {
         if (square2.textContent === "") {
         square2.textContent = game.getActivePlayer().token;
         game.playRound(0,1)
-        square2.textContent = currentBoard[0][1].getValue();
 
         } else {
          alert("This cell is not available. Choose again.")
@@ -319,7 +317,6 @@ function renderContent() {
         if (square3.textContent === "") {
         square3.textContent = game.getActivePlayer().token;
         game.playRound(0,2)
-        square3.textContent = currentBoard[0][2].getValue();
 
         
         } else {
@@ -330,7 +327,6 @@ function renderContent() {
         if (square4.textContent === "") {
         square4.textContent = game.getActivePlayer().token;
         game.playRound(1,0)
-        square4.textContent = currentBoard[1][0].getValue();
 
         } else {
          alert("This cell is not available. Choose again.")
@@ -340,7 +336,6 @@ function renderContent() {
         if (square5.textContent === "") {
         square5.textContent = game.getActivePlayer().token;
         game.playRound(1,1)
-        square5.textContent = currentBoard[1][1].getValue();
 
 
         } else {
@@ -351,7 +346,6 @@ function renderContent() {
         if (square6.textContent === "") {
         square6.textContent = game.getActivePlayer().token;
         game.playRound(1,2)
-        square6.textContent = currentBoard[1][2].getValue();
 
 
         } else {
@@ -362,7 +356,6 @@ function renderContent() {
         if (square7.textContent === "") {
         square7.textContent = game.getActivePlayer().token;
         game.playRound(2,0)
-        square7.textContent = currentBoard[2][0].getValue();
 
         
         } else {
@@ -373,7 +366,6 @@ function renderContent() {
         if (square8.textContent === "") {
         square8.textContent = game.getActivePlayer().token;
         game.playRound(2,1)
-        square8.textContent = currentBoard[2][1].getValue();
 
         } else {
          alert("This cell is not available. Choose again.")
@@ -383,7 +375,6 @@ function renderContent() {
         if (square9.textContent === "") {
         square9.textContent = game.getActivePlayer().token;
         game.playRound(2,2)
-        square9.textContent = currentBoard[2][2].getValue();
 
         } else {
          alert("This cell is not available. Choose again.")
