@@ -1,11 +1,3 @@
-/*
-Update 6 aug: 
-
-the last icon is always 0 instead of O or X when winning. Check the bug
-
-*/
-document.querySelector(".userInput").showModal() 
-
 function GameBoard() {
     //Create the board for the game, 3x3 grid
     const rows = 3;
@@ -223,8 +215,6 @@ function GameController() {
             activePlayer = players[0];
             document.querySelector(".players-turn").textContent = `It's ${activePlayer.name}'s turn`
             document.querySelector(".popup").close()
-
-
         })
     }
 
@@ -253,6 +243,14 @@ function GameController() {
 
             playerOneName = document.getElementById("player1Name").value;
             playerTwoName = document.getElementById("player2Name").value;
+
+            if (playerOneName === "") {
+                playerOneName = "player One"
+            }
+
+            if (playerTwoName === "") {
+                playerTwoName = "player Two"
+            }
 
             players[0].name = playerOneName;
             players[1].name = playerTwoName;
@@ -314,6 +312,15 @@ function renderContent() {
     const currentBoard = game.getBoard();
     const gameOver = game.checkWinner();
 
+    const container = document.querySelector(".container")
+    if (game.getActivePlayer().token === "X"){
+    container.style.color = "blue";
+    } 
+    
+    if (game.getActivePlayer().token === "O") {
+        container.style.color = "red";
+    }
+
     const square1 = document.querySelector(".square1");
     const square2 = document.querySelector(".square2");
     const square3 = document.querySelector(".square3 ");
@@ -327,6 +334,13 @@ function renderContent() {
 
     square1.addEventListener("click", () => {
         if (square1.textContent === "") {
+        // color mark with red or blue
+        if (game.getActivePlayer().token === "X"){
+        square1.style.color = "blue";
+        } 
+        if (game.getActivePlayer().token === "O") {
+            square1.style.color = "red";
+         }
         square1.textContent = game.getActivePlayer().token;
         game.playRound(0,0)
  
@@ -338,6 +352,14 @@ function renderContent() {
     
     square2.addEventListener("click", () => {
         if (square2.textContent === "") {
+        // color mark with red or blue
+        if (game.getActivePlayer().token === "X"){
+        square2.style.color = "blue";
+        } 
+        if (game.getActivePlayer().token === "O") {
+            square2.style.color = "red";
+         }
+
         square2.textContent = game.getActivePlayer().token;
         game.playRound(0,1)
 
@@ -348,6 +370,13 @@ function renderContent() {
 
     square3.addEventListener("click", () => {
         if (square3.textContent === "") {
+         // color mark with red or blue
+        if (game.getActivePlayer().token === "X"){
+        square3.style.color = "blue";
+        } 
+        if (game.getActivePlayer().token === "O") {
+            square3.style.color = "red";
+         }
         square3.textContent = game.getActivePlayer().token;
         game.playRound(0,2)
 
@@ -358,6 +387,13 @@ function renderContent() {
     })
     square4.addEventListener("click", () => {
         if (square4.textContent === "") {
+             // color mark with red or blue
+        if (game.getActivePlayer().token === "X"){
+        square4.style.color = "blue";
+        } 
+        if (game.getActivePlayer().token === "O") {
+            square4.style.color = "red";
+         }
         square4.textContent = game.getActivePlayer().token;
         game.playRound(1,0)
 
@@ -367,6 +403,13 @@ function renderContent() {
     })
     square5.addEventListener("click", () => {
         if (square5.textContent === "") {
+         // color mark with red or blue
+        if (game.getActivePlayer().token === "X"){
+        square5.style.color = "blue";
+        } 
+        if (game.getActivePlayer().token === "O") {
+            square5.style.color = "red";
+         }
         square5.textContent = game.getActivePlayer().token;
         game.playRound(1,1)
 
@@ -377,6 +420,13 @@ function renderContent() {
     })
     square6.addEventListener("click", () => {
         if (square6.textContent === "") {
+         // color mark with red or blue
+        if (game.getActivePlayer().token === "X"){
+        square6.style.color = "blue";
+        } 
+        if (game.getActivePlayer().token === "O") {
+            square6.style.color = "red";
+         }
         square6.textContent = game.getActivePlayer().token;
         game.playRound(1,2)
 
@@ -387,6 +437,13 @@ function renderContent() {
     })
     square7.addEventListener("click", () => {
         if (square7.textContent === "") {
+         // color mark with red or blue
+        if (game.getActivePlayer().token === "X"){
+        square7.style.color = "blue";
+        } 
+        if (game.getActivePlayer().token === "O") {
+            square7.style.color = "red";
+         }
         square7.textContent = game.getActivePlayer().token;
         game.playRound(2,0)
 
@@ -397,6 +454,13 @@ function renderContent() {
     })
     square8.addEventListener("click", () => {
         if (square8.textContent === "") {
+             // color mark with red or blue
+        if (game.getActivePlayer().token === "X"){
+        square8.style.color = "blue";
+        } 
+        if (game.getActivePlayer().token === "O") {
+            square8.style.color = "red";
+         }
         square8.textContent = game.getActivePlayer().token;
         game.playRound(2,1)
 
@@ -406,6 +470,13 @@ function renderContent() {
     })
     square9.addEventListener("click", () => {
         if (square9.textContent === "") {
+         // color mark with red or blue
+        if (game.getActivePlayer().token === "X"){
+        square9.style.color = "blue";
+        } 
+        if (game.getActivePlayer().token === "O") {
+            square9.style.color = "red";
+         }
         square9.textContent = game.getActivePlayer().token;
         game.playRound(2,2)
 
@@ -421,3 +492,5 @@ function renderContent() {
 }
 
 const show = renderContent();
+
+document.querySelector(".userInput").showModal() 
