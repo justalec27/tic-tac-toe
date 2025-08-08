@@ -130,7 +130,7 @@ dialog p {
   border: none;
   height: 400px;
   width: 300px;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(252, 234, 204);
   border-radius: 10px;
 
   
@@ -186,3 +186,21 @@ fieldset input {
 textarea:focus, input:focus{
     outline: none;
 }
+
+.noBtn, .yesBtn {
+    background-color: black;
+    color: white;
+    height: 45px;
+    width: 100px;
+    border-radius: 15px;
+    font-family: "Love Ya Like A Sister", cursive;
+    font-size: 24px;
+    border: none;
+}
+
+.noBtn:hover, .yesBtn:hover{
+    background-color: rgb(34, 255, 0);
+    color: black;
+}
+
+button:focus {outline:0;}
