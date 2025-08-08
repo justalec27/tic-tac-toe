@@ -5,7 +5,6 @@ the last icon is always 0 instead of O or X when winning. Check the bug
 
 */
 
-
 function GameBoard() {
     //Create the board for the game, 3x3 grid
     const rows = 3;
@@ -84,10 +83,10 @@ function Cell() {
 }
 
 
-function GameController(
-    playerOneName = "Player One",
-    playerTwoName = "Player Two"
-    ) {
+function GameController() {
+
+    let playerOneName = "Player One";
+    let playerTwoName = "Player Two";
     
     const board = GameBoard();
     const currentBoard = board.getBoard()
@@ -229,19 +228,45 @@ function GameController(
     }
 
      function clickRestart() {
-        const restartbutton = document.querySelector(".restart")
-        restartbutton.addEventListener("click", () => {
+        const restartButton = document.querySelector(".restart")
+        restartButton.addEventListener("click", () => {
             game.resetDisplay();
             board.resetBoard();
             activePlayer = players[0];
             document.querySelector(".players-turn").textContent = `It's ${activePlayer.name}'s turn`
         })
+     }
 
+     function clickInput() {
+        const inputButton = document.querySelector(".input")
+        inputButton.addEventListener("click", () => {
+            document.querySelector(".userInput").showModal()
+
+        })
+     }
+
+     function submitNames() {
+        const submitNames = document.querySelector("#submitBtn")
+        submitNames.addEventListener("click", (event) => {
+            event.preventDefault();
+
+            playerOneName = document.getElementById("player1Name").value;
+            playerTwoName = document.getElementById("player2Name").value;
+
+            players[0].name = playerOneName;
+            players[1].name = playerTwoName;
+            document.querySelector(".players-turn").textContent = `It's ${activePlayer.name}'s turn`
+
+
+            document.querySelector(".userInput").close();
+        })  
      }
 
     clickNo()
     clickYes()
     clickRestart()
+    clickInput()
+    submitNames()
    
 
     const playRound = (row, column) => {
@@ -256,17 +281,12 @@ function GameController(
         // Decide on winner 
         const gameOver = checkWinner();
         if (gameOver === true) {
-            document.querySelector("dialog").showModal()
-            
-            // board.resetBoard();
-            // activePlayer = players[0];
-            // printNewRound();
+            document.querySelector(".popup").showModal()
+        
             return true
         }
 
-        // Switch player turn
         switchPlayerTurn();
-        // printNewRound();
         return true
         }};
         

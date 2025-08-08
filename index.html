@@ -13,6 +13,8 @@
     <div class="game-wrapper">
         <div class="game-info">
             <h1>Game rules</h1>
+            <button class="restart">Restart Game</button>
+            <button class="input">Input names</button>
 
         </div>
         <div class="container">
@@ -31,11 +33,20 @@
                 <button class="noBtn">No</button>
                 <button class="yesBtn">Yes</button>
             </dialog>
+            <dialog class="userInput">
+                <form action="1231.com" method="post" id="form">
+                    <p>Enter player names</p>
+                    <label for="player1Name"></label>
+                    <input type="text" id="player1Name" name="player1Name" placeholder="Player One" required>
+                    <label for="player2Name"></label>
+                    <input type="text" id="player2Name" name="player2Name" placeholder="Player Two" required>
+                    <input type="submit" id="submitBtn">
+                </form>
+            </dialog>
         </div>        
         <div class="game-results" >
         <h1>Game details<h1>
         <p class="players-turn">It's player's one turn</p>
-        <p class="winner-status">Congratulations, the winner is player 1</p>
         </div>
     </div>
 </body>
