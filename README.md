@@ -1,4 +1,4 @@
-# tic-tac-toe Game
+# Tic-Tac-Toe Game
 
 A classic game of Tic-Tac-Toe implemented in JavaScript, HTML & CSS.
 
@@ -13,9 +13,9 @@ Experience the game live at:
 -  Lightweight implementation with no external libraries
 
 ## Built With
-HTML5 – Markup
-CSS3 – Styling
-JavaScript – Game logic
+- HTML5 – Markup
+- CSS3 – Styling
+- JavaScript – Game logic
 
 ## How to Play
 1. Enter players name
