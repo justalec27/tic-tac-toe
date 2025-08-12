@@ -1,9 +1,13 @@
 html, body {
-    margin: 0;
     padding: 0;
-    background-color: #FCF6EC;
     font-family: "Love Ya Like A Sister", cursive;
     font-weight: 400;
+    background-image: linear-gradient(to right,rgb(38, 83, 208), rgb(208, 35, 35));
+    color: white;
+}
+
+footer {
+   text-align: center;
 }
 
 h1 {
@@ -24,12 +28,12 @@ h1 {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
-    border: 2px solid black;
+    border: 2px solid white;
 
 }
 
 .container > div {
-    border: 3px solid black ; 
+    border: 3px solid white ; 
     text-align: center;
     display: flex;
     justify-content: center;
@@ -88,18 +92,20 @@ dialog p {
     border-radius: 15px;
     justify-self: center;
     font-family: "Love Ya Like A Sister", cursive;
-    background-color: rgb(34, 255, 0);
+    background-color: rgb(255, 255, 255);
     font-weight: bold;
     border: none;
     font-size: 20px;
+   
 }
 
 .restart:hover {
-    background-color: blueviolet;
+    background-color: rgb(0, 0, 0);
+    color: white;
 }
 
 ::backdrop {
-  background-color: #FCF6EC;
+  background-image: linear-gradient(to right,rgb(38, 83, 208), rgb(208, 35, 35));
 }
 
 ::after {
@@ -118,6 +124,7 @@ dialog p {
     border-radius: 25px;
     font-weight: bold;
     color: black;
+    cursor: pointer;
 }
 
 #submitBtn:hover {
@@ -129,7 +136,7 @@ dialog p {
   border: none;
   height: 400px;
   width: 300px;
-  background-color: rgba(54, 54, 54, 0.112);
+  background-color: rgba(255, 255, 255, 0.412);
   border-radius: 10px;
 } 
 
@@ -208,3 +215,7 @@ textarea:focus, input:focus{
 }
 
 button:focus {outline:0;}
+
+button {
+ cursor: pointer;
+}
